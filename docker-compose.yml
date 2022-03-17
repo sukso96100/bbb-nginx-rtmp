@@ -1,0 +1,52 @@
+version: '3.3'
+services:
+  bbb-streamer:
+    image: aauzid/bigbluebutton-livestreaming
+    container_name: live_streaming
+    shm_size: '2gb'
+    environment:
+      # BigBlueButton Server url:
+      - BBB_URL=https://video.eventyay.com/bigbluebutton/api
+      # BigBlueButton secret: Secret of your BBB installation (You can get the secret with: bbb-conf --secret)
+      - BBB_SECRET=bbb-installation-secret
+      # BigBlueButton meetingID: 
+      - BBB_MEETING_ID=bbb-meeting-id
+      # start meeting (optional):
+      - BBB_START_MEETING=false
+      # attendee password (optional - has to be set to the attendee password of moodle/greenlight or any other frontend to allow joining via their links):
+      # - BBB_ATTENDEE_PASSWORD=password
+      # moderator password (optional - has to be set to the moderator password of moodle/greenlight or any other frontend to allow joining via their links):
+      # - BBB_MODERATOR_PASSWORD=password
+      # meeting title (optional):
+      #- BBB_MEETING_TITLE=liveStreaming Test
+      # download / save BigBlueButton meeting
+      - BBB_DOWNLOAD_MEETING=false
+      # play intro file (can be a local file in videodata folder e.g. /video/intro.mp4 or a url of a mediastream e.g. https://my.intro.stream)
+      - BBB_INTRO=false
+      # begin the intro at position (optional, e.g. 00:00:05)
+      #- BBB_BEGIN_INTRO_AT=04:40
+      # end intro after (optional, e.g. 01:00:00 - after one hour)
+      #- BBB_END_INTRO_AT=
+      # The username to join the meeting. (Default: Live)
+      - BBB_USER_NAME=Live Streaming 
+      # Media server url:
+      - BBB_STREAM_URL=rtmp://restreamer/live
+      # Message to post in BBB Chat when joining a conference
+      - BBB_CHAT_MESSAGE=This meeting is streamed to
+      # Resolution to be streamed/downloaded in format WxH (default 1920x1080)
+      - BBB_RESOLUTION=1920x1080
+      # stream video bitrate
+      - FFMPEG_STREAM_VIDEO_BITRATE=4000
+      # threads used for stream (0=auto)
+      - FFMPEG_STREAM_THREADS=0
+      # Timezone (default: Europe/Vienna):
+      - TZ=Asia/Singapore
+    volumes:
+      - ./videodata:/video
+  restreamer:
+    image: tiangolo/nginx-rtmp
+    container_name: re_streaming
+    ports:
+      - 1935:1935
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
