@@ -6,7 +6,7 @@ services:
     shm_size: '2gb'
     environment:
       # BigBlueButton Server url:
-      - BBB_URL=https://video.eventyay.com/bigbluebutton/api
+      - BBB_URL=https://your.bbb.service.com/bigbluebutton/api
       # BigBlueButton secret: Secret of your BBB installation (You can get the secret with: bbb-conf --secret)
       - BBB_SECRET=bbb-installation-secret
       # BigBlueButton meetingID: 
