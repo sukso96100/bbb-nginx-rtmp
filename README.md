@@ -44,3 +44,18 @@ rtmp {
 ### Editing `docker-compose.yml`
 
 At least update `BBB_URL`, `BBB_MEETING_ID`, `BBB_SECRET`, `BBB_STREAM_URL` variable so that you can stream the BBB room that you want to stream. See [here](https://github.com/aau-zid/BigBlueButton-liveStreaming) for more detailed configuration instruction.
+
+### Running streaming setup
+You need Docker Compose to be installed on your machine. See [this documentation about installing Docker Compose](https://docs.docker.com/compose/install/)
+
+After installing Docker Compose, Simply use following commands to start and stop streaming setup
+```bash
+# Start streaming on background
+docker-compose up -d
+
+# See log output
+docker-compose logs
+
+# Stop streaming setup
+docker-compose stop
+```
