@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   bbb-streamer:
-    image: aauzid/bigbluebutton-livestreaming
+    image: ghcr.io/sukso96100/bbb-nginx-rtmp:bigbluebutton-livestreaming
     container_name: live_streaming
     shm_size: '2gb'
     environment:
